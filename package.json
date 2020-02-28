@@ -1,0 +1,26 @@
+{
+  "name": "team-profile",
+  "version": "1.0.0",
+  "description": "Packages for Team Profile project",
+  "main": "app.js",
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ealfvin-dev/Team-Profile.git"
+  },
+  "author": "Erik Alfvin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ealfvin-dev/Team-Profile/issues"
+  },
+  "homepage": "https://github.com/ealfvin-dev/Team-Profile#readme",
+  "dependencies": {
+    "inquirer": "^7.0.4"
+  }
+}
