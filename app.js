@@ -6,8 +6,6 @@ const fs = require("fs");
 
 const inquirer = require("inquirer");
 
-writeHeader();
-
 //Prompt for manager name
 function buildTeam() {
     inquirer.prompt([{
@@ -45,15 +43,74 @@ function writeCard(member) {
 }
 
 //Prompt for more team members
-let askAgain = 1;
-
 function getOtherMembers() {
     inquirer.prompt([{
         type: "list",
         message: "Enter and new team member: ",
         choices: ["Engineer", "Intern", "Exit"],
-        name: "choices"
-    }]);
+        name: "employeeType"
+    }
+    ]).then(function(response) {
+        if(response.employeeType === "Engineer") {
+            inquirer.prompt([
+                {
+                    type: "input",
+                    message: "Employee Name: ",
+                    name: "name"
+                },
+                {
+                    type: "input",
+                    message: "Employee ID: ",
+                    name: "id"
+                },
+                {
+                    type: "input",
+                    message: "Employee email: ",
+                    name: "email"
+                },
+                {
+                    type: "input",
+                    message: "Employee GitHub: ",
+                    name: "github"
+                }
+            ]).then(function(engResponse) {
+                const engineer = new Engineer(engResponse.name, engResponse.id, engResponse.email, engResponse.github);
+                writeCard(engineer);
+                getOtherMembers();
+            })
+        }
+        if(response.employeeType === "Intern") {
+            inquirer.prompt([
+                {
+                    type: "input",
+                    message: "Employee Name: ",
+                    name: "name"
+                },
+                {
+                    type: "input",
+                    message: "Employee ID: ",
+                    name: "id"
+                },
+                {
+                    type: "input",
+                    message: "Employee email: ",
+                    name: "email"
+                },
+                {
+                    type: "input",
+                    message: "Employee School: ",
+                    name: "school"
+                }
+            ]).then(function(intResponse) {
+                const intern = new Intern(intResponse.name, intResponse.id, intResponse.email, intResponse.github);
+                writeCard(intern);
+                getOtherMembers();
+            })
+        }
+        if(response.employeeType === "Exit") {
+            writeFooter();
+        }
+    });
 }
 
 function writeHeader(){
@@ -109,4 +166,5 @@ function writeFooter() {
 }
 
 //Entry point:
+writeHeader();
 buildTeam();
