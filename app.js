@@ -8,34 +8,52 @@ const inquirer = require("inquirer");
 
 writeHeader();
 
-inquirer.prompt([{
-    message: "Manager Name: ",
-    name: "name"
-},
-{
-    message: "Manager ID: ",
-    name: "id"
-},
-{
-    message: "Manager email: ",
-    name: "email"
-},
-{
-    message: "Manager Office Number: ",
-    name: "officeNum"
-}])
-.then(function(input) {
-    const manager = new Manager(input.name, input.id, input.email, input.officeNum);
+//Prompt for manager name
+function buildTeam() {
+    inquirer.prompt([{
+        message: "Manager Name: ",
+        name: "name"
+    },
+    {
+        message: "Manager ID: ",
+        name: "id"
+    },
+    {
+        message: "Manager email: ",
+        name: "email"
+    },
+    {
+        message: "Manager Office Number: ",
+        name: "officeNum"
+    }])
+    .then(function(input) {
+        const manager = new Manager(input.name, input.id, input.email, input.officeNum);
 
-    writeCard(manager);
-});
+        writeCard(manager);
 
+        getOtherMembers();
+    });
+}
+
+//Write manager into html
 function writeCard(member) {
     fs.appendFile("./output/team.html", "\n" + member.makeCard() + "\n", function(err) {
         if(err) {
             throw err;
         }
     });
+}
+
+//Prompt for more team members
+let askAgain = 1;
+
+function getOtherMembers() {
+    inquirer.prompt([{
+        type: "list",
+        message: "Enter and new team member: ",
+        choices: ["Engineer", "Intern", "Exit"],
+        name: "choices"
+    }]);
 }
 
 function writeHeader(){
@@ -89,3 +107,6 @@ function writeFooter() {
         }
     });
 }
+
+//Entry point:
+buildTeam();
