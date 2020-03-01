@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/ealfvin-dev/Team-Profile#readme",
   "dependencies": {
-    "inquirer": "^7.0.4"
+    "inquirer": "^7.0.4",
+    "jest": "^25.1.0"
   }
 }

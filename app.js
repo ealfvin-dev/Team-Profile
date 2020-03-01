@@ -102,7 +102,7 @@ function getOtherMembers() {
                     name: "school"
                 }
             ]).then(function(intResponse) {
-                const intern = new Intern(intResponse.name, intResponse.id, intResponse.email, intResponse.github);
+                const intern = new Intern(intResponse.name, intResponse.id, intResponse.email, intResponse.school);
                 writeCard(intern);
                 getOtherMembers();
             })
